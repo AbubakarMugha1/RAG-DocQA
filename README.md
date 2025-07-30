@@ -1,6 +1,5 @@
 # iDoc-RAG: AI-Powered Document Intelligence
 
-![Project Banner](docs/banner.png)  
 *A smart document Q&A system powered by Llama3 and RAG architecture*
 
 ## 🌟 Features
