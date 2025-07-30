@@ -1,6 +1,9 @@
-langchain
 pypdf2
 python-dotenv
 streamlit
 faiss-cpu
 docx
+langchain
+langchain-groq
+langchain-community
+sentence-transformers
