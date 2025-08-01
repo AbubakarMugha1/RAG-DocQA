@@ -1,16 +1,18 @@
 # iDoc: Instant Document QA with RAG  
 *Powered by Llama3 & optimized for speed*
 
-![Demo Screenshot](assets/screenshot1.png) *(Add your screenshot here)*
+![Demo Screenshot](assets/screenshot1.png)
 
-## 🚀 Features  
+## 🚀 Features
+- **Completely Open Source**: No API payments required
 - **Instant Search**: Binary embeddings deliver fast retrieval with minimal accuracy loss  
 - **Multi-Format Support**:  
   📄 PDFs  
   📝 Word (.docx)  
   📋 Plain text (.txt)  
 - **Self-Contained**: ChromaDB stores vectors locally  
-- **Smart Processing**: Dynamic chunking adapts to document complexity  
+- **Smart Processing**: Dynamic chunking adapts to document complexity
+- **Duplicate Document Identification**: Skips chunking and embedding duplicate documents to save processing time
 
 ## 🛠️ Tech Stack  
 
