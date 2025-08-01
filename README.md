@@ -31,7 +31,7 @@
 </div>
 
 ## 🚀 Features
-- **Completely Open Source**: No API payments required
+- **Completely Open Source**: No API payments required.
 - **Instant Search**: Binary embeddings deliver fast retrieval with minimal accuracy loss  
 - **Multi-Format Support**:  
   📄 PDFs  
@@ -39,7 +39,9 @@
   📋 Plain text (.txt)  
 - **Self-Contained**: ChromaDB stores vectors locally  
 - **Smart Processing**: Dynamic chunking adapts to document complexity
+- **Multiple Document Addition/Removal**: Manage your local storage by adding/removing multiple documents 
 - **Duplicate Document Identification**: Skips chunking and embedding duplicate documents to save processing time
+- **Easily Modifiable**: Swappable embeddings/LLM with minimal code changes. Furthermore, you may edit chunking process according to your own requirements.
 
 ## 🛠️ Tech Stack  
 
@@ -57,8 +59,3 @@
 - Python 3.10+
 - [Groq API key](https://console.groq.com)
 
-### Setup
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/yourusername/iDoc.git
-   cd iDoc
