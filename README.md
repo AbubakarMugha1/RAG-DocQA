@@ -45,13 +45,13 @@
 
 ## 🛠️ Tech Stack  
 
-| Component       | Technology                  |  
-|-----------------|-----------------------------|  
-| LLM             | Llama3-70B (Groq API)       |  
-| Embeddings      | BGE-small (binary mode)     |  
-| Vector Store    | ChromaDB                    |  
-| Framework       | LangChain                   |  
-| UI              | Streamlit                   |  
+| Component       | Technology                               |  
+|-----------------|------------------------------------------|  
+| LLM             | Llama3-70B (Groq API)                    |  
+| Embeddings      | BAAI/BGE-small-en-v1.5 (binary mode)     |  
+| Vector Store    | ChromaDB (persists locally)              |  
+| Framework       | LangChain                                |  
+| UI              | Streamlit                                |  
 
 ## ⚡ Quick Start
 
