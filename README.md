@@ -1,7 +1,7 @@
 # iDoc: Instant Document QA with RAG  
 *Powered by Llama3 & optimized for speed*
 
-![Demo Screenshot](assets/screenshot.png) *(Add your screenshot here)*
+![Demo Screenshot](assets/screenshot1.png) *(Add your screenshot here)*
 
 ## 🚀 Features  
 - **Instant Search**: Binary embeddings deliver fast retrieval with minimal accuracy loss  
