@@ -6,24 +6,24 @@
     <tr>
       <td align="center">
         <a href="assets/screenshot2.png" target="_blank">
-          <img src="assets/screenshot2.png" width="200px" alt="Upload Interface"/>
+          <img src="assets/screenshot2.png" width="250px" alt="Upload Interface"/>
         </a>
       </td>
       <td align="center">
         <a href="assets/screenshot3.png" target="_blank">
-          <img src="assets/screenshot3.png" width="200px" alt="Document Processing"/>
+          <img src="assets/screenshot3.png" width="250px" alt="Document Processing"/>
         </a>
       </td>
     </tr>
     <tr>
       <td align="center">
         <a href="assets/screenshot1.png" target="_blank">
-          <img src="assets/screenshot1.png" width="200px" alt="Query Results"/>
+          <img src="assets/screenshot1.png" width="250px" alt="Query Results"/>
         </a>
       </td>
       <td align="center">
         <a href="assets/screenshot4.png" target="_blank">
-          <img src="assets/screenshot4.png" width="200px" alt="Sidebar Management - Add/Remove Multiple Documents"/>
+          <img src="assets/screenshot4.png" width="250px" alt="Sidebar Management - Add/Remove Multiple Documents"/>
         </a>
       </td>
     </tr>
