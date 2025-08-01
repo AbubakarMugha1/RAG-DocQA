@@ -1,24 +1,35 @@
-# iDoc: RAG based chatbot for your documents 
+# iDoc: Instant Document QA with RAG  
+*Powered by Llama3 & optimized for speed*
 
-*powered by Llama3*
+![Demo Screenshot](assets/screenshot.png) *(Add your screenshot here)*
 
-- **Multi-Format Support**: Process PDFs, Word docs, and text files  
-- **Smart Chunking**: Dynamic text splitting optimized for document complexity  
-- **Modular Design**: Replace any component with minimal changes to codebase   
+## 🚀 Features  
+- **Instant Search**: Binary embeddings deliver fast retrieval with minimal accuracy loss  
+- **Multi-Format Support**:  
+  📄 PDFs  
+  📝 Word (.docx)  
+  📋 Plain text (.txt)  
+- **Self-Contained**: ChromaDB stores vectors locally  
+- **Smart Processing**: Dynamic chunking adapts to document complexity  
 
-| Component          | Technology                  |
-|--------------------|-----------------------------|
-| LLM                | Llama3-70B (Groq API)       |
-| Embeddings         | all-MiniLM-L6-v2            |
-| Vector Store       | FAISS                       |
-| Framework          | LangChain                   |
-| UI                 | Streamlit                   |
+## 🛠️ Tech Stack  
 
-## Quick Start
-- Install dependencies : pip install -r requirements.txt
-- Run : streamlit run app.py (inside the project folder)
+| Component       | Technology                  |  
+|-----------------|-----------------------------|  
+| LLM             | Llama3-70B (Groq API)       |  
+| Embeddings      | BGE-small (binary mode)     |  
+| Vector Store    | ChromaDB                    |  
+| Framework       | LangChain                   |  
+| UI              | Streamlit                   |  
+
+## ⚡ Quick Start
 
 ### Prerequisites
 - Python 3.10+
-- Python packages listed in requirements.txt
 - [Groq API key](https://console.groq.com)
+
+### Setup
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/yourusername/iDoc.git
+   cd iDoc
