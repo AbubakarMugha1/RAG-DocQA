@@ -5,9 +5,10 @@ from PyPDF2 import PdfReader #for PDFs
 from docx import Document #for Word documents
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-from langchain_community.vectorstores import FAISS #Facebook AI Similarity Search
+from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain_groq import ChatGroq
+
 
 #-----Text Extraction Functions------#
 def extract_from_PDF(pdf): #function to extract text from PDF's
@@ -59,18 +60,60 @@ def make_chunks(text):
 def main():
     load_dotenv()
     #webpage design
-    st.set_page_config(page_title = "iDoc")
+    st.set_page_config(page_title = "iDoc", layout = "wide")
     st.header("iDoc - Powered by Llama3 70B")
+
+    #initialise DB
+    embeddings = HuggingFaceBgeEmbeddings(model_name = "BAAI/bge-small-en-v1.5",
+                                        model_kwargs = {"device": "cpu"},
+                                        encode_kwargs = {"normalize_embeddings": True, "binary": True})
+    
+    #load existing DB or initliase a new one
+    knowledge_base = Chroma(
+        persist_directory = './chroma_db',
+        embedding_function = embeddings,
+        collection_metadata = {"hhssw:space": "hamming"}
+    )
+
+    with st.sidebar:
+        st.subheader("Documents List")
+
+        #load currently added documents (if any) from the DB
+        collection = knowledge_base.get()
+        existing_docs = collection['metadatas']
+        doc_names = list(set(doc.get('source', 'Unknown') for doc in existing_docs)) if existing_docs else [] #extract document names
+
+        if doc_names:
+            selected_docs = st.multiselect(
+                "Select document(s) to remove : ", 
+                doc_names,
+            )
+
+            #remove multiple selected documents
+            if st.button("Remove Selected Document(s)"):
+                ids_to_remove = [collection['ids'][i] for i, doc in enumerate(existing_docs) if doc.get('source') in selected_docs]
+                knowledge_base.delete(ids_to_remove)
+                knowledge_base.persist()
+                st.success(f"Removed {len(selected_docs)} document(s)!")
+                st.rerun()
+        else:
+            st.info("No documents present in the database!")
+        
 
     #upload files
     files = st.file_uploader(label = "Upload Documents:", type = ["pdf", "docx", "txt"], label_visibility = "hidden", accept_multiple_files = True)
-
     #check if valid file
     if files:
         #determine document type and then extract text accordingly
         valid_files = 0
         all_chunks = []
         for file in files:
+
+            existing_sources = [doc.get('source') for doc in knowledge_base.get()['metadatas']]
+            if file.name in existing_sources:
+                st.warning(f"Skipped duplicate: {file.name}")
+                continue
+
             text = ""
             if file.type == "application/pdf": #for PDF
                 text = extract_from_PDF(file)
@@ -93,33 +136,33 @@ def main():
             if chunks:
                 all_chunks.extend(chunks)
                 valid_files += 1
-                st.success(f"Document was successfully split into {len(chunks)} chunks!")
+                knowledge_base.add_texts(chunks, metadatas = [{"source" : file.name}] * len(chunks))
+                knowledge_base.persist()
+                st.success(f"Document of length {len(chunks)} chunks added!")
 
-            #creating embeddings
+        
+    if len(knowledge_base.get()['metadatas']) > 0: #if any chunks were made/files were processed
+        
+        query = st.text_input("Ask a question about your documents:") 
+        
+        llm = ChatGroq(model_name = "llama3-70b-8192", #set up LLM 
+                api_key = os.getenv("GROQ_API_KEY"),
+                temperature = 0.4) #modify temperature according to requirements. Lower means more accurate/less creative and vice versa.
+        
+        if query:
+            with st.spinner("Searching your documents 🚀"):
 
-        if len(all_chunks) > 0 and valid_files > 0: #if any chunks were made/files were processed
-            embeddings = HuggingFaceBgeEmbeddings(model_name = "all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
-            knowledge_base = FAISS.from_texts(all_chunks, embeddings) #set up local knowledge base
+                qa_chain = RetrievalQA.from_chain_type( #load LLM's response based on provided context (if any)
+                    llm = llm,
+                    chain_type = "stuff",
+                    retriever = knowledge_base.as_retriever()
+                )
 
-            query = st.text_input("Ask a question about your documents:") 
-            
-            llm = ChatGroq(model_name = "llama3-70b-8192", #set up LLM 
-                    api_key = os.getenv("GROQ_API_KEY"),
-                    temperature = 0.4) 
-            
-            if query:
-                with st.spinner("Searching your documents 🚀"):
-
-                    qa_chain = RetrievalQA.from_chain_type(
-                        llm = llm,
-                        chain_type = "stuff",
-                        retriever = knowledge_base.as_retriever()
-                    )
-
-                    response = qa_chain.run(query)
-                    st.write(response)  
-        else:
-            st.error("No valid chunks were generated from uploaded file(s)")
+                response = qa_chain.run(query)
+                st.write(response)  #display response 
+    else:
+        st.error("Please upload documents to query!")
 
 if __name__ == '__main__':
     main()
+
