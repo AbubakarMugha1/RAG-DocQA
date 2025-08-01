@@ -1,7 +1,34 @@
 # iDoc: Instant Document QA with RAG  
 *Powered by Llama3 & optimized for speed*
 
-![Demo Screenshot](assets/screenshot1.png)
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="assets/screenshot2.png" target="_blank">
+          <img src="assets/screenshot2.png" width="200px" alt="Upload Interface"/>
+        </a>
+      </td>
+      <td align="center">
+        <a href="assets/screenshot3.png" target="_blank">
+          <img src="assets/screenshot3.png" width="200px" alt="Document Processing"/>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="assets/screenshot1.png" target="_blank">
+          <img src="assets/screenshot1.png" width="200px" alt="Query Results"/>
+        </a>
+      </td>
+      <td align="center">
+        <a href="assets/screenshot4.png" target="_blank">
+          <img src="assets/screenshot4.png" width="200px" alt="Sidebar Management - Add/Remove Multiple Documents"/>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## 🚀 Features
 - **Completely Open Source**: No API payments required
